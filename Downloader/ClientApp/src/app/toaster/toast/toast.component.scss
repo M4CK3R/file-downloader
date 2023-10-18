@@ -1,0 +1,14 @@
+$toast-delay: var(--toast-delay);
+:root{
+    --toast-delay: 500ms;
+}
+
+.status-square{
+    width: 2em;
+    height: 2em;
+}
+
+.dismissed{
+    transition: opacity $toast-delay linear;
+    opacity: 0;
+}

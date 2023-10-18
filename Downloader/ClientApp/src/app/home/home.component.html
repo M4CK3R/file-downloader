@@ -1,0 +1,110 @@
+<div class="mb-5">
+  <app-card title="Dashboard" class="h1">
+    <div class="container h1">
+      <div class="row">
+        <div class="col text-end">Total:</div>
+        <div class="col">{{ items.length }}</div>
+      </div>
+      <div class="row">
+        <div class="col text-end">Downloading:</div>
+        <div class="col">{{ inProgressCount() }}</div>
+      </div>
+      <div class="row">
+        <div class="col text-end">Total Speed:</div>
+        <div class="col">{{ totalSpeed() | number : "1.2-2" }} MB/s</div>
+      </div>
+    </div>
+  </app-card>
+</div>
+<div class="mb-3" *ngFor="let item of items">
+  <app-card title="{{ item.name }}">
+    <div class="container">
+      <div class="row">
+        <div class="col-2">
+          Url
+          <button
+            class="ms-2 btn btn-primary inline btn-sm"
+            (click)="cpy(item.url)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-clipboard"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"
+              />
+              <path
+                d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"
+              />
+            </svg>
+          </button>
+        </div>
+        <div class="col-10 text-truncate">
+          {{ item.url }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-2">Is done:</div>
+        <div class="col-10">
+          <input
+            [checked]="item.isDone"
+            type="checkbox"
+            class="form-check"
+            disabled
+          />
+        </div>
+      </div>
+      <div class="row" *ngIf="item.progress && !item.isDone">
+        <div class="col-2">Progress:</div>
+        <div class="col-10">
+          <div
+            class="progress position-relative"
+            role="progressbar"
+            aria-label="Progress"
+            [attr.aria-valuenow]="item.progress.bytesDownloaded"
+            aria-valuemin="0"
+            [attr.aria-valuemax]="item.progress.bytesTotal"
+          >
+            <div
+              class="progress-bar progress-bar-striped progress-bar-animated"
+              [style]="'width: ' + item.progress.percentage + '%'"
+            ></div>
+            <span class="justify-content-center d-flex position-absolute w-100">
+              {{ item.progress.megaBytesDownloaded }}/{{
+                item.progress.megaBytesTotal
+              }}
+              MB ({{ item.progress.percentage | number : "1.0-2" }}%)
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="item.progress && !item.isDone">
+        <div class="col-2">Speed:</div>
+        <div class="col-10">
+          {{ item.progress.megaBytesPerSecond | number : "1.2-2" }} MB/s
+        </div>
+      </div>
+      <div class="row" *ngIf="item.progress && !item.isDone">
+        <div class="col-2">ETA:</div>
+        <div class="col-10">
+          {{
+            ((item.progress.megaBytesTotal -
+              item.progress.megaBytesDownloaded) /
+              item.progress.megaBytesPerSecond) *
+              1000 -
+              3600000 | date : "HH:mm:ss"
+          }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <button class="btn btn-danger" (click)="remove(item.id)">Remove</button>
+        </div>
+      </div>
+    </div>
+  </app-card>
+</div>

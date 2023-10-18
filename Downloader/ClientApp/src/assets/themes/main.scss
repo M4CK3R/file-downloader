@@ -1,0 +1,15 @@
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+$body-bg: #1e2021;
+$body-color: #f9e1ff;
+$secondary-color: darken($secondary, 10%);
+$secondary-bg: $secondary;
+$primary: #00cc66;
+$secondary: #14ffc4;
+$font-size-base: 1.1em;
+$success: #0add08;
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+);

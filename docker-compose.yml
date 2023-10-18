@@ -1,0 +1,16 @@
+version: "3.0"
+services:
+  downloader:
+    container_name: downloader
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./data/downloader:/data
+    environment:
+      - FilesPath=/data
+      - ConnectionStrings__DbConnection=Host=localhost;Port=5432;Username=downloader;Password=downloader;Database=downloader;Search Path=downloader;
+    restart: unless-stopped

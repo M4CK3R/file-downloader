@@ -1,0 +1,26 @@
+<app-card title="Add request">
+  <form (ngSubmit)="onSubmit()" class="m-1">
+    <div class="mb-1">
+      <label for="name" class="form-label">Name:</label>
+      <input class="form-control" type="text" id="name" name="name" [(ngModel)]="data.Name" />
+    </div>
+    <div class="mb-1">
+      <label for="url" class="form-label">URL:</label>
+      <input class="form-control" type="text" id="url" name="url" [(ngModel)]="data.Url" />
+    </div>
+    <div class="mb-2 form-check form-switch">
+      <label for="retry" class="form-check-label me-2">Retry:</label>
+      <input class="form-check-input" type="checkbox" id="retry" name="retry" [(ngModel)]="data.Retry" />
+    </div>
+    <div class="mb-1" [class.d-none]="!data.Retry">
+      <label for="maxTries" class="form-label">Max Tries:</label>
+      <input class="form-control"
+        type="number"
+        id="maxTries"
+        name="maxTries"
+        [(ngModel)]="data.MaxTries"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</app-card>

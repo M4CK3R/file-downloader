@@ -1,0 +1,15 @@
+<div class="toast show" [class]="isDismissed ? 'dismissed' : ''" [attr.data-delay]="delayMs" (mouseenter)="blockDismiss()" (mouseleave)="unblockDismiss()">
+  <div class="toast-header text-bg-secondary">
+    <div
+      class="status-square rounded me-2 border"
+      [class]="getToastClass()"
+    ></div>
+    <strong class="me-auto">
+      {{ title }}
+    </strong>
+    <button type="button" class="btn-close text-bg-secondary" (click)="dismissToast()"></button>
+  </div>
+  <div class="toast-body">
+    {{ message }}
+  </div>
+</div>

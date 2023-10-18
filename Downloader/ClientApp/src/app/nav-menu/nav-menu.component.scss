@@ -1,0 +1,12 @@
+@import "/src/assets/themes/main.scss";
+
+.nav-link {
+  color: $primary;
+  &:hover {
+    color: lighten($primary, 20%);
+  }
+}
+
+.nav-item.active > .nav-link {
+  color: $secondary;
+}

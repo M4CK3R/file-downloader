@@ -1,0 +1,11 @@
+.break{
+    word-break: break-all;
+}
+
+.no-break{
+    word-break: keep-all;
+    word-wrap: break-word;
+    white-space: nowrap;
+    text-overflow: clip;
+    overflow: hidden;
+}
